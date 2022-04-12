@@ -4,26 +4,25 @@
 //
 //  Created by Samuel Polgar on 12/4/2022.
 //
-
-import Foundation
-import UIKit
 import SpriteKit
-//https://stackoverflow.com/questions/40648501/changing-texture-for-subclass-of-skspritenode
-//balloon subclass of sksprite contains all info on the balloon - change here for ease of access
-class BalloonNode: SKSpriteNode
-{
-    let spriteSize = CGSize(width: 0.5, height: 0.5)
+
+class Balloon: SKSpriteNode {
     var balloonColor: String?
     var gameScore: Int?
     
-    init()
-    {
-        super.init(texture: nil, size: spriteSize)
-        chooseBalloonColor()
+    init () {
+        let balloonSize = CGSize(width: 50, height: 50)
+        
+        super.init(texture: nil, color: UIColor.clear, size: balloonSize)
+        
+        setup()
     }
     
-    //assign balloon priorities, scores and images accordingly
-    private func chooseBalloonColor()
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder: ) has not been implemented")
+    }
+    
+    private func setup()
     {
         let randomInt = Int.random(in: 0..<100)
         switch randomInt
@@ -52,15 +51,5 @@ class BalloonNode: SKSpriteNode
             self.balloonColor = "nil"
             self.gameScore = 0
         }
-    }
-    
-    private func chooseDirection()
-    {
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder)
-    {
-             fatalError("init(coder:) has not been implemented")
     }
 }

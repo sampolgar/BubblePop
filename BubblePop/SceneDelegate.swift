@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  BubblePop
+//  BubblePop2
 //
-//  Created by Samuel Polgar on 12/4/2022.
+//  Created by Samuel Polgar on 13/4/2022.
 //
 
 import UIKit
