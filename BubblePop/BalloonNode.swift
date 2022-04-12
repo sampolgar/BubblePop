@@ -12,13 +12,13 @@ import SpriteKit
 //balloon subclass of sksprite contains all info on the balloon - change here for ease of access
 class BalloonNode: SKSpriteNode
 {
-    let spriteSize = CGSize(width: 0.05, height: 0.05)
+    let spriteSize = CGSize(width: 0.5, height: 0.5)
     var balloonColor: String?
     var gameScore: Int?
     
     init()
     {
-        super.init(texture: nil, color: UIColor.clear, size: spriteSize)
+        super.init(texture: nil, size: spriteSize)
         chooseBalloonColor()
     }
     
@@ -52,6 +52,11 @@ class BalloonNode: SKSpriteNode
             self.balloonColor = "nil"
             self.gameScore = 0
         }
+    }
+    
+    private func chooseDirection()
+    {
+        
     }
     
     required init?(coder aDecoder: NSCoder)

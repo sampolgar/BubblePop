@@ -6,6 +6,12 @@
 //
 import SpriteKit
 
+struct PhysicsCategory {
+  static let none      : UInt32 = 0
+  static let all       : UInt32 = UInt32.max
+  static let balloon   : UInt32 = 0b1       // 1
+}
+
 func /(point: CGPoint, scalar: CGFloat) -> CGPoint {
   return CGPoint(x: point.x / scalar, y: point.y / scalar)
 }
@@ -24,11 +30,7 @@ class GameScene: SKScene
             ))
     }
     
-    struct PhysicsCategory {
-      static let none      : UInt32 = 0
-      static let all       : UInt32 = UInt32.max
-      static let balloon   : UInt32 = 0b1       // 1
-    }
+
     
     func random() -> CGFloat {
       return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
@@ -42,6 +44,7 @@ class GameScene: SKScene
     func addBalloon()
     {
         let balloonNode = BalloonNode()
+//        let balloonNode : BalloonNode = BalloonNode()
         
         balloonNode.physicsBody                                 = SKPhysicsBody(circleOfRadius: balloonNode.size.width/2)
         balloonNode.physicsBody?.isDynamic                      = true
@@ -58,7 +61,7 @@ class GameScene: SKScene
         let startingX = random(min: balloonNode.size.width/2, max:size.width - balloonNode.size.width/2)
     
         balloonNode.position = CGPoint(x: startingX, y: startingY)
-        
+        print(" Balloon Node: \(balloonNode)")
         addChild(balloonNode)
         
         let balloonSpeed        = random(min: CGFloat(2.0), max: CGFloat(4.0))

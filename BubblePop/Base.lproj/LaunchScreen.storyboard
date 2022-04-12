@@ -16,16 +16,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Bubble Pop Starting" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M51-SN-lUO">
-                                <rect key="frame" x="128" y="268" width="158" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Bubble Pop Starting" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M51-SN-lUO">
+                                <rect key="frame" x="128" y="268" width="158" height="370"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                        </accessibility>
                         <constraints>
+                            <constraint firstItem="M51-SN-lUO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="224" id="YXu-UK-G3s"/>
                             <constraint firstItem="M51-SN-lUO" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="eKv-v2-L08"/>
+                            <constraint firstItem="M51-SN-lUO" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="qdr-ev-xAU"/>
                         </constraints>
                     </view>
                 </viewController>

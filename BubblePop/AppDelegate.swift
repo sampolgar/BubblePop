@@ -4,11 +4,12 @@
 //
 //  Created by Samuel Polgar on 12/4/2022.
 //
-
 import UIKit
 
 @main
+//@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    var window: UIWindow?
 
 
 

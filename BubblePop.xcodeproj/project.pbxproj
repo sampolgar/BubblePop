@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8EDBE9C928049FFA00FB83D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDBE9C828049FFA00FB83D1 /* AppDelegate.swift */; };
 		8EDBE9CB28049FFA00FB83D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDBE9CA28049FFA00FB83D1 /* SceneDelegate.swift */; };
-		8EDBE9CD28049FFA00FB83D1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDBE9CC28049FFA00FB83D1 /* ViewController.swift */; };
 		8EDBE9D028049FFA00FB83D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EDBE9CE28049FFA00FB83D1 /* Main.storyboard */; };
 		8EDBE9D228049FFB00FB83D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EDBE9D128049FFB00FB83D1 /* Assets.xcassets */; };
 		8EDBE9D528049FFB00FB83D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EDBE9D328049FFB00FB83D1 /* LaunchScreen.storyboard */; };
@@ -23,16 +22,14 @@
 		8EDBE9C528049FFA00FB83D1 /* BubblePop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BubblePop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EDBE9C828049FFA00FB83D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EDBE9CA28049FFA00FB83D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8EDBE9CC28049FFA00FB83D1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8EDBE9CF28049FFA00FB83D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8EDBE9D128049FFB00FB83D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8EDBE9D428049FFB00FB83D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8EDBE9D628049FFB00FB83D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8EDBE9DC2804A09700FB83D1 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		8EDBE9DE2804A0AA00FB83D1 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		8EDBE9DC2804A09700FB83D1 /* GameScene.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; tabWidth = 2; };
+		8EDBE9DE2804A0AA00FB83D1 /* GameViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		8EDBE9E02804A0C800FB83D1 /* BalloonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonNode.swift; sourceTree = "<group>"; };
 		8EDBE9E22804A62900FB83D1 /* todo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = todo.swift; path = ../../../navigationTutorial/navigationTutorial2/navigationTutorial2/todo.swift; sourceTree = "<group>"; };
-		8EDBE9E42804AED500FB83D1 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,7 +46,6 @@
 		8EDBE9BC28049FFA00FB83D1 = {
 			isa = PBXGroup;
 			children = (
-				8EDBE9E42804AED500FB83D1 /* MyPlayground.playground */,
 				8EDBE9C728049FFA00FB83D1 /* BubblePop */,
 				8EDBE9C628049FFA00FB83D1 /* Products */,
 			);
@@ -69,7 +65,6 @@
 				8EDBE9E22804A62900FB83D1 /* todo.swift */,
 				8EDBE9C828049FFA00FB83D1 /* AppDelegate.swift */,
 				8EDBE9CA28049FFA00FB83D1 /* SceneDelegate.swift */,
-				8EDBE9CC28049FFA00FB83D1 /* ViewController.swift */,
 				8EDBE9CE28049FFA00FB83D1 /* Main.storyboard */,
 				8EDBE9D128049FFB00FB83D1 /* Assets.xcassets */,
 				8EDBE9D328049FFB00FB83D1 /* LaunchScreen.storyboard */,
@@ -154,7 +149,6 @@
 			files = (
 				8EDBE9DF2804A0AA00FB83D1 /* GameViewController.swift in Sources */,
 				8EDBE9E12804A0C800FB83D1 /* BalloonNode.swift in Sources */,
-				8EDBE9CD28049FFA00FB83D1 /* ViewController.swift in Sources */,
 				8EDBE9E32804A62900FB83D1 /* todo.swift in Sources */,
 				8EDBE9C928049FFA00FB83D1 /* AppDelegate.swift in Sources */,
 				8EDBE9DD2804A09700FB83D1 /* GameScene.swift in Sources */,

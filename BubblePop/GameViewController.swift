@@ -9,10 +9,11 @@ import SpriteKit
 
 class GameViewController: UIViewController
 {
-    override func viewDidLoad()
-    {
-        super.viewDidLoad()
+    override func viewDidLoad(){
+      super.viewDidLoad()
+      print(" 1. my skview is \(self.view!)")
         let scene = GameScene(size: view.bounds.size)
+        print(" 2. my skview is \(self.view!)")
         let skView = view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true
