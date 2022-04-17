@@ -27,14 +27,11 @@ import SpriteKit
 //Core Motion reports motion- and environment-related data from the onboard hardware of iOS
 import CoreMotion
 
-
-struct PhysicsCategory {
-  static let none      : UInt32 = 0
-  static let all       : UInt32 = UInt32.max
-  static let monster   : UInt32 = 0b1       // 1
-  static let projectile: UInt32 = 0b10      // 2
+enum CollisionTypes: UInt32 {
+  case none = 0
+  case all = 10
+  case balloon = 0b1
 }
-
 
 class GameScene: SKScene {
 //  let coreMotion = CMMotionManager()
@@ -77,6 +74,10 @@ class GameScene: SKScene {
     addBalloons()
     physicsWorld.gravity = .zero
 //    physicsWorld.contactDelegate = self
+//    SKAction.run {
+//      <#code#>
+//    }
+    
     }
   
   func createSceneContents(){
@@ -102,48 +103,12 @@ class GameScene: SKScene {
     gameBalloon.physicsBody?.isDynamic = true                                               // let the balloon move
     gameBalloon.physicsBody?.velocity = CGVector(dx: velocityX, dy: velocityY)              //set starting velocity
     
+    //add collision https://developer.apple.com/documentation/scenekit/scnphysicsbody/1514768-categorybitmask/
+    gameBalloon.physicsBody?.categoryBitMask = CollisionTypes.balloon.rawValue
+    gameBalloon.physicsBody?.contactTestBitMask =  CollisionTypes.balloon.rawValue
+    gameBalloon.physicsBody?.collisionBitMask = CollisionTypes.none.rawValue
     
-              //bounce from the walls
-    
-//    gameBalloon.p
-    
-    
-    //configure starting direction, between 0.5 radians and pie minus 0.5 radians
-//    let startingX = random(min: -45, max: 45)
-//    let startingY = random(min: 0, max: 1)
-//    let angle = atan2(startingX, startingY)
-
-//    let gameBalloon.
-//    playerSprite.zRotation = angle - 90 * degreesToRadians
-//    let initialBalloonDirection =
-    
-    // min angle: 10, max angle: 170
-//    int min_angle = 10;
-//    int max_angle = 170;
-//    int degrees = arc4random_uniform(max_angle - min_angle) + min_angle;
-//    float radians = degrees * M_PI/180.0f;
-//    myVector = CGVectorMake(cos(radians), sin(radians));
-    
-    
-//    //configure speed
-//    let balloonDuration = random(min: CGFloat(2.0), max: CGFloat(4.0))
-//
-//    //add the child
-//    addChild(gameBalloon)
-//    gameBalloon.position = CGPoint(x: balloonX, y: gameBalloon.size.height)
-//    gameBalloon.physicsBody?.velocity = CGVector(dx: 50, dy: 50)
-//    gameBalloon.zRotation = angle - 90 * degreesToRadians
-//    gameBalloon.zRotation = angle * degreesToRadians
-    
-    
-//    print("printing the angle: \(angle)")
-//    print("printing the angle minus 90: \(angle - 90)")
-//    print("printing the radian: \(angle - 90 * degreesToRadians)")
-    
-    //add starting direction
-    
-    
-//    print("ballon x min: \(gameBalloon.size.width/2) max: \(size.width - gameBalloon.size.width/2) ballon x \(balloonX)")
+//    gameBalloon.run(SKAction.sequence())
     
   }
   
@@ -154,15 +119,67 @@ class GameScene: SKScene {
     updateBalloon(deltaTime)
   }
   
-  
+  //run this very often to check where the gameBalloons are
   func updateBalloon(_ dt: CFTimeInterval){
     
-    balloonVelocity.dx = balloonVelocity.dx * CGFloat(dt)         //playerVelocity.dx = playerVelocity.dx + playerAcceleration.dx * CGFloat(dt) - adds acceleration from core motion
-    balloonVelocity.dy = balloonVelocity.dy * CGFloat(dt)         //playerVelocity.dy = playerVelocity.dy + playerAcceleration.dy * CGFloat(dt) - adds acceleration from core motion
+//    balloonVelocity.dx = balloonVelocity.dx * CGFloat(dt)         //playerVelocity.dx = playerVelocity.dx + playerAcceleration.dx * CGFloat(dt) - adds acceleration from core motion
+//    balloonVelocity.dy = balloonVelocity.dy * CGFloat(dt)         //playerVelocity.dy = playerVelocity.dy + playerAcceleration.dy * CGFloat(dt) - adds acceleration from core motion
+    
+    balloonVelocity.dx = max(-maxBalloonVelocity, min(maxBalloonVelocity, balloonVelocity.dx))
+    balloonVelocity.dy = max(-maxBalloonVelocity, min(maxBalloonVelocity, balloonVelocity.dy))
+    print("Velocities : x \(balloonVelocity.dx)    and y \(balloonVelocity.dy)")
+    
+    var newX = gameBalloon.position.x + balloonVelocity.dx * CGFloat(dt)
+    var newY = gameBalloon.position.y + balloonVelocity.dy * CGFloat(dt)
+    
+    print("newX : x \(newX)    and newY \(newY)")
+    
+    var hitVertical = false
+    var hitHorizontal = false
+    
+    //check
+    if newX < 0 {
+      newX = 0
+      hitHorizontal = true
+    } else if newX > size.width {
+      newX = size.width
+      hitHorizontal = true
+    }
     
     
+    if newY < 0 {
+      newY = 0
+      hitVertical = true
+    } else if newY > size.height {
+      newY = size.height
+      hitVertical = true
+    }
+    
+    //if balloon hits vertical, change y velocity and acceleration
+    if hitVertical {
+      print("Hit vert")
+      balloonVelocity.dx = balloonVelocity.dx
+      balloonVelocity.dy = -balloonVelocity.dy
+      
+    }
+    
+    //if balloon hits horizontal, change x velocity and acceleration
+    if hitHorizontal {
+      print("Hit Horitzontal")
+      //Change Velocity
+      balloonVelocity.dx = -balloonVelocity.dx
+      balloonVelocity.dy = balloonVelocity.dy
+            
+    }
+    
+    gameBalloon.position = CGPoint(x: newX, y: newY)
     
   }
+  //change the direction of the balloon
+//  let angle = atan2(playerVelocity.dy, playerVelocity.dx)
+//  print("angle is \(angle)")
+//  playerSprite.zRotation = angle - 90 * degreesToRadians
+  
   
   
 }
