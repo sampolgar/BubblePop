@@ -9,6 +9,7 @@ import SpriteKit
 class Balloon: SKSpriteNode {
     var balloonColor: String?
     var gameScore: Int?
+//    var balloonDirection: String
     
     init () {
         let balloonSize = CGSize(width: 50, height: 50)
@@ -22,8 +23,15 @@ class Balloon: SKSpriteNode {
         fatalError("init(coder: ) has not been implemented")
     }
     
-    private func setup()
-    {
+    private func setBalloonDirection(){
+        
+    }
+    
+    public func changeBalloonDirection(){
+        
+    }
+    
+    private func setup() {
         let randomInt = Int.random(in: 0..<100)
         switch randomInt
         {
