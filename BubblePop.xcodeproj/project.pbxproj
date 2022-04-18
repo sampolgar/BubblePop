@@ -16,7 +16,6 @@
 		8EDBE9DF2804A0AA00FB83D1 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDBE9DE2804A0AA00FB83D1 /* GameViewController.swift */; };
 		8EDBE9E12804A0C800FB83D1 /* Balloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDBE9E02804A0C800FB83D1 /* Balloon.swift */; };
 		8EDBE9E32804A62900FB83D1 /* todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDBE9E22804A62900FB83D1 /* todo.swift */; };
-		8EDBE9E6280615B300FB83D1 /* old.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDBE9E5280615B300FB83D1 /* old.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,8 +30,11 @@
 		8EDBE9DE2804A0AA00FB83D1 /* GameViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		8EDBE9E02804A0C800FB83D1 /* Balloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balloon.swift; sourceTree = "<group>"; };
 		8EDBE9E22804A62900FB83D1 /* todo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = todo.swift; path = ../../../navigationTutorial/navigationTutorial2/navigationTutorial2/todo.swift; sourceTree = "<group>"; };
-		8EDBE9E5280615B300FB83D1 /* old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = old.swift; sourceTree = "<group>"; };
 		8EDD7682280A8861001C3D7F /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		8EDD7684280CEE63001C3D7F /* GameScene-Old.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "GameScene-Old.md"; sourceTree = "<group>"; };
+		8EDD7685280D4C7E001C3D7F /* GameScene-tut1.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "GameScene-tut1.md"; sourceTree = "<group>"; };
+		8EDD7686280D4CAB001C3D7F /* gamescene-trig.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "gamescene-trig.md"; sourceTree = "<group>"; };
+		8EDD7687280D4E96001C3D7F /* xcode.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = xcode.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +51,10 @@
 		8EDBE9BC28049FFA00FB83D1 = {
 			isa = PBXGroup;
 			children = (
+				8EDD7687280D4E96001C3D7F /* xcode.md */,
+				8EDD7686280D4CAB001C3D7F /* gamescene-trig.md */,
+				8EDD7684280CEE63001C3D7F /* GameScene-Old.md */,
+				8EDD7685280D4C7E001C3D7F /* GameScene-tut1.md */,
 				8EDD7682280A8861001C3D7F /* MyPlayground.playground */,
 				8EDBE9C728049FFA00FB83D1 /* BubblePop */,
 				8EDBE9C628049FFA00FB83D1 /* Products */,
@@ -76,7 +82,6 @@
 				8EDBE9DC2804A09700FB83D1 /* GameScene.swift */,
 				8EDBE9DE2804A0AA00FB83D1 /* GameViewController.swift */,
 				8EDBE9E02804A0C800FB83D1 /* Balloon.swift */,
-				8EDBE9E5280615B300FB83D1 /* old.swift */,
 			);
 			path = BubblePop;
 			sourceTree = "<group>";
@@ -156,7 +161,6 @@
 				8EDBE9E12804A0C800FB83D1 /* Balloon.swift in Sources */,
 				8EDBE9E32804A62900FB83D1 /* todo.swift in Sources */,
 				8EDBE9C928049FFA00FB83D1 /* AppDelegate.swift in Sources */,
-				8EDBE9E6280615B300FB83D1 /* old.swift in Sources */,
 				8EDBE9DD2804A09700FB83D1 /* GameScene.swift in Sources */,
 				8EDBE9CB28049FFA00FB83D1 /* SceneDelegate.swift in Sources */,
 			);
