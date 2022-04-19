@@ -5,7 +5,7 @@
 //  Created by Samuel Polgar on 19/4/2022.
 //credit to https://tutorials.tinyappco.com/SwiftGames/Timer
 import SpriteKit
-class CountDownClock: SKLabelNode {
+class CountDownClockLabel: SKLabelNode {
     var endTime:Date!
     
     override init () {

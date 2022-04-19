@@ -18,8 +18,8 @@
 		8EDBE9E32804A62900FB83D1 /* todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDBE9E22804A62900FB83D1 /* todo.swift */; };
 		8EDD7689280D76F2001C3D7F /* BalloonPopper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD7688280D76EF001C3D7F /* BalloonPopper.swift */; };
 		8EDD768B280D9DD1001C3D7F /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD768A280D9DCF001C3D7F /* Stack.swift */; };
-		8EDD768D280DA20E001C3D7F /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD768C280DA20A001C3D7F /* Score.swift */; };
-		8EDD768F280DAD08001C3D7F /* CountDownClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD768E280DAD06001C3D7F /* CountDownClock.swift */; };
+		8EDD768F280DAD08001C3D7F /* CountDownClockLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD768E280DAD06001C3D7F /* CountDownClockLabel.swift */; };
+		8EDD7691280F4634001C3D7F /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD7690280F4631001C3D7F /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,8 +40,8 @@
 		8EDD7687280D4E96001C3D7F /* xcode.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = xcode.md; sourceTree = "<group>"; };
 		8EDD7688280D76EF001C3D7F /* BalloonPopper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonPopper.swift; sourceTree = "<group>"; };
 		8EDD768A280D9DCF001C3D7F /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
-		8EDD768C280DA20A001C3D7F /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
-		8EDD768E280DAD06001C3D7F /* CountDownClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownClock.swift; sourceTree = "<group>"; };
+		8EDD768E280DAD06001C3D7F /* CountDownClockLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownClockLabel.swift; sourceTree = "<group>"; };
+		8EDD7690280F4631001C3D7F /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,8 +90,8 @@
 				8EDBE9E02804A0C800FB83D1 /* Balloon.swift */,
 				8EDD7688280D76EF001C3D7F /* BalloonPopper.swift */,
 				8EDD768A280D9DCF001C3D7F /* Stack.swift */,
-				8EDD768C280DA20A001C3D7F /* Score.swift */,
-				8EDD768E280DAD06001C3D7F /* CountDownClock.swift */,
+				8EDD768E280DAD06001C3D7F /* CountDownClockLabel.swift */,
+				8EDD7690280F4631001C3D7F /* Player.swift */,
 			);
 			path = BubblePop;
 			sourceTree = "<group>";
@@ -167,15 +167,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EDD768F280DAD08001C3D7F /* CountDownClock.swift in Sources */,
+				8EDD768F280DAD08001C3D7F /* CountDownClockLabel.swift in Sources */,
 				8EDBE9DF2804A0AA00FB83D1 /* GameViewController.swift in Sources */,
-				8EDD768D280DA20E001C3D7F /* Score.swift in Sources */,
 				8EDBE9E12804A0C800FB83D1 /* Balloon.swift in Sources */,
 				8EDD7689280D76F2001C3D7F /* BalloonPopper.swift in Sources */,
 				8EDBE9E32804A62900FB83D1 /* todo.swift in Sources */,
 				8EDD768B280D9DD1001C3D7F /* Stack.swift in Sources */,
 				8EDBE9C928049FFA00FB83D1 /* AppDelegate.swift in Sources */,
 				8EDBE9DD2804A09700FB83D1 /* GameScene.swift in Sources */,
+				8EDD7691280F4634001C3D7F /* Player.swift in Sources */,
 				8EDBE9CB28049FFA00FB83D1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

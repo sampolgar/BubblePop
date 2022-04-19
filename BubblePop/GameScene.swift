@@ -23,8 +23,9 @@ class GameScene: SKScene {
   var sceneContent = false
   var balloonsAdded = [SKSpriteNode]()
   var balloonStack = Stack()
-  var balloonScore = Score(player: "test")
-  let timer = CountDownClock()
+  var player = Player(name: "test")
+  let timerLabel = CountDownClockLabel()
+  let scoreLabel = SKLabelNode(fontNamed: "Arial")
   
   override func didMove(to view: SKView) {
     if (!self.sceneContent) {
@@ -34,20 +35,31 @@ class GameScene: SKScene {
 //    physicsWorld.contactDelegate = self
     physicsWorld.gravity = .zero
     createClock()
+    createScore()
   }
   
   func createClock(){
-    addChild(timer)
-    timer.startWithDuration(durationInSeconds: 60)
-    let clockPosition = CGPoint(x: frame.midX, y: frame.midY)
-//            let clockPosition = CGPoint(x: SKScene.size.width / 2, y: SKScene.size.height / 2)
+    addChild(timerLabel)
+    let clockPosition = CGPoint(x: frame.maxX, y: frame.maxY)
     print("clock position: \(clockPosition)")
-    timer.position = clockPosition
+    timerLabel.position = clockPosition
   }
 
+  func createScore(){
+    scoreLabel.text = String(player.score)
+    scoreLabel.fontSize = 65
+    scoreLabel.fontColor = SKColor.white
+    scoreLabel.position = CGPoint(x: frame.midX, y: frame.midY)
+    addChild(scoreLabel)
+  }
+  
+  func updateScore(){
+    scoreLabel.text =  String(player.score)
+  }
   
   override func sceneDidLoad() {
     setup15Ballons()
+    timerLabel.startWithDuration(durationInSeconds: 60)
   }
   
   override func update(_ currentTime: TimeInterval) {
@@ -55,7 +67,8 @@ class GameScene: SKScene {
     if self.balloonCount < 15 {
       print("Creating balloon. balloon count: \(self.balloonCount)" )
       createBalloon()
-      timer.update()
+      timerLabel.update()
+      updateScore()
     }
   }
   
@@ -109,15 +122,12 @@ class GameScene: SKScene {
     if (!balloonStack.isEmpty()) {
       let lastPoppedBalloon = balloonStack.peek()
       if (lastPoppedBalloon.balloonColor == currentBalloonColor){
-        balloonScore.score += balloon.gameScore!*1.5
-        print("popped another \(currentBalloonColor) and score is \(balloonScore.score)")
+        player.score += balloon.gameScore!*1.5
       } else {
-        balloonScore.score += balloon.gameScore!
-        print("popped 2 separate \(currentBalloonColor) and score is \(balloonScore.score)")
+        player.score += balloon.gameScore!
       }
     } else {
-      balloonScore.score += balloon.gameScore!
-      print("popped first \(currentBalloonColor) and score is \(balloonScore.score)")
+      player.score += balloon.gameScore!
     }
     balloonStack.push(balloon)
     balloon.removeFromParent()
