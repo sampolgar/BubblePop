@@ -24,6 +24,7 @@ class GameScene: SKScene {
   var balloonsAdded = [SKSpriteNode]()
   var balloonStack = Stack()
   var balloonScore = Score(player: "test")
+  let timer = CountDownClock()
   
   override func didMove(to view: SKView) {
     if (!self.sceneContent) {
@@ -32,7 +33,18 @@ class GameScene: SKScene {
         }
 //    physicsWorld.contactDelegate = self
     physicsWorld.gravity = .zero
+    createClock()
   }
+  
+  func createClock(){
+    addChild(timer)
+    timer.startWithDuration(durationInSeconds: 60)
+    let clockPosition = CGPoint(x: frame.midX, y: frame.midY)
+//            let clockPosition = CGPoint(x: SKScene.size.width / 2, y: SKScene.size.height / 2)
+    print("clock position: \(clockPosition)")
+    timer.position = clockPosition
+  }
+
   
   override func sceneDidLoad() {
     setup15Ballons()
@@ -43,9 +55,9 @@ class GameScene: SKScene {
     if self.balloonCount < 15 {
       print("Creating balloon. balloon count: \(self.balloonCount)" )
       createBalloon()
+      timer.update()
     }
   }
-  
   
   func createSceneContents(){
     let borderBody = SKPhysicsBody(edgeLoopFrom: self.frame)

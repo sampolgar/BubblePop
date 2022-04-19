@@ -19,6 +19,7 @@
 		8EDD7689280D76F2001C3D7F /* BalloonPopper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD7688280D76EF001C3D7F /* BalloonPopper.swift */; };
 		8EDD768B280D9DD1001C3D7F /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD768A280D9DCF001C3D7F /* Stack.swift */; };
 		8EDD768D280DA20E001C3D7F /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD768C280DA20A001C3D7F /* Score.swift */; };
+		8EDD768F280DAD08001C3D7F /* CountDownClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD768E280DAD06001C3D7F /* CountDownClock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,11 +37,11 @@
 		8EDD7682280A8861001C3D7F /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8EDD7684280CEE63001C3D7F /* GameScene-Old.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "GameScene-Old.md"; sourceTree = "<group>"; };
 		8EDD7685280D4C7E001C3D7F /* GameScene-tut1.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "GameScene-tut1.md"; sourceTree = "<group>"; };
-		8EDD7686280D4CAB001C3D7F /* gamescene-trig.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "gamescene-trig.md"; sourceTree = "<group>"; };
 		8EDD7687280D4E96001C3D7F /* xcode.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = xcode.md; sourceTree = "<group>"; };
 		8EDD7688280D76EF001C3D7F /* BalloonPopper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonPopper.swift; sourceTree = "<group>"; };
 		8EDD768A280D9DCF001C3D7F /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		8EDD768C280DA20A001C3D7F /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
+		8EDD768E280DAD06001C3D7F /* CountDownClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownClock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +59,6 @@
 			isa = PBXGroup;
 			children = (
 				8EDD7687280D4E96001C3D7F /* xcode.md */,
-				8EDD7686280D4CAB001C3D7F /* gamescene-trig.md */,
 				8EDD7684280CEE63001C3D7F /* GameScene-Old.md */,
 				8EDD7685280D4C7E001C3D7F /* GameScene-tut1.md */,
 				8EDD7682280A8861001C3D7F /* MyPlayground.playground */,
@@ -91,6 +91,7 @@
 				8EDD7688280D76EF001C3D7F /* BalloonPopper.swift */,
 				8EDD768A280D9DCF001C3D7F /* Stack.swift */,
 				8EDD768C280DA20A001C3D7F /* Score.swift */,
+				8EDD768E280DAD06001C3D7F /* CountDownClock.swift */,
 			);
 			path = BubblePop;
 			sourceTree = "<group>";
@@ -166,6 +167,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EDD768F280DAD08001C3D7F /* CountDownClock.swift in Sources */,
 				8EDBE9DF2804A0AA00FB83D1 /* GameViewController.swift in Sources */,
 				8EDD768D280DA20E001C3D7F /* Score.swift in Sources */,
 				8EDBE9E12804A0C800FB83D1 /* Balloon.swift in Sources */,
