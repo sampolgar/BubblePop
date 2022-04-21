@@ -5,7 +5,7 @@
 //  Created by Samuel Polgar on 19/4/2022.
 //credit to https://tutorials.tinyappco.com/SwiftGames/Timer
 import SpriteKit
-class CountDownClockLabel: SKLabelNode {
+class Timer: SKLabelNode {
     var endTime:Date!
     
     override init () {
@@ -40,6 +40,7 @@ class CountDownClockLabel: SKLabelNode {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder: ) has not been implemented")
-    }
+        super.init(coder: aDecoder)
+      }
+
 }

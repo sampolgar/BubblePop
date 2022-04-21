@@ -3,7 +3,7 @@
 //  BubblePop
 //
 //  Created by Samuel Polgar on 18/4/2022.
-//
+//https://developer.apple.com/forums/thread/72641
 import SpriteKit
 
 class BalloonPopper: SKSpriteNode {

@@ -4,11 +4,8 @@
 //
 //  Created by Samuel Polgar on 13/4/2022.
 //
-//To do
-// Make single balloon move and bounce from the walls
-// Create 15 balloons
-
 import SpriteKit
+import GameplayKit
 
 struct PhysicsCategory {
   static let none             : UInt32 = 0
@@ -24,8 +21,12 @@ class GameScene: SKScene {
   var balloonsAdded = [SKSpriteNode]()
   var balloonStack = Stack()
   var player = Player(name: "test")
-  let timerLabel = CountDownClockLabel()
+  var timer = Timer()
   let scoreLabel = SKLabelNode(fontNamed: "Arial")
+  
+  //testing
+//  var entities = [GKEntity]()
+  var graphs = [String : GKGraph]()
   
   override func didMove(to view: SKView) {
     if (!self.sceneContent) {
@@ -34,32 +35,30 @@ class GameScene: SKScene {
         }
 //    physicsWorld.contactDelegate = self
     physicsWorld.gravity = .zero
-    createClock()
+    
+    // Setup timer
+    if let timer = childNode(withName: "timer") as? Timer {
+      self.timer = timer
+    }
+    
     createScore()
-  }
-  
-  func createClock(){
-    addChild(timerLabel)
-    let clockPosition = CGPoint(x: frame.maxX, y: frame.maxY)
-    print("clock position: \(clockPosition)")
-    timerLabel.position = clockPosition
   }
 
   func createScore(){
     scoreLabel.text = String(player.score)
     scoreLabel.fontSize = 65
     scoreLabel.fontColor = SKColor.white
-    scoreLabel.position = CGPoint(x: frame.midX, y: frame.midY)
+    scoreLabel.position = CGPoint(x:self.size.width, y:self.size.height)
+    scoreLabel.horizontalAlignmentMode = .right
     addChild(scoreLabel)
   }
   
   func updateScore(){
-    scoreLabel.text =  String(player.score)
+    scoreLabel.text = String(player.score)
   }
   
   override func sceneDidLoad() {
-    setup15Ballons()
-    timerLabel.startWithDuration(durationInSeconds: 60)
+    timer.startWithDuration(durationInSeconds: 60)
   }
   
   override func update(_ currentTime: TimeInterval) {
@@ -67,9 +66,11 @@ class GameScene: SKScene {
     if self.balloonCount < 15 {
       print("Creating balloon. balloon count: \(self.balloonCount)" )
       createBalloon()
-      timerLabel.update()
-      updateScore()
     }
+    
+    timer.update()
+    
+    updateScore()
   }
   
   func createSceneContents(){
@@ -82,7 +83,7 @@ class GameScene: SKScene {
     let balloon = Balloon()
     balloon.name = "balloon"
     
-    //check if a balloon exists there already
+    //check if a balloon exists in the same position already
     for currentBalloon in balloonsAdded {
       if (balloon.intersects(currentBalloon)){
         return
@@ -94,12 +95,12 @@ class GameScene: SKScene {
     balloonsAdded.append(balloon)
   }
   
-  func setup15Ballons(){
-    for _ in 1...15 {
-        createBalloon()
-    }
-  }
-  
+//  func setup15Ballons(){
+//    for _ in 1...15 {
+//        createBalloon()
+//    }
+//  }
+//
   //check the user touched a balloon
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     guard let touch = touches.first else { return }
@@ -114,11 +115,7 @@ class GameScene: SKScene {
   
   func touchedBalloon(balloon: Balloon) {
     let currentBalloonColor = balloon.balloonColor
-    print("colour: \(currentBalloonColor)")
-    print("score: \(balloon.gameScore)")
-    //update score
-    
-    //check if the last balloon added was the same color, if so, add double points
+    //check if the last balloon added was the same color, if so, add 1.5x points
     if (!balloonStack.isEmpty()) {
       let lastPoppedBalloon = balloonStack.peek()
       if (lastPoppedBalloon.balloonColor == currentBalloonColor){
@@ -134,41 +131,3 @@ class GameScene: SKScene {
     balloonCount -= 1
   }
 }
-//  func pinPoppedBalloon(balloon: SKSpriteNode, balloonPopper: SKSpriteNode) {
-//    print("collision! for \(balloon.attributeValues)")
-//    balloon.removeFromParent()
-//  }
-//}
-
-//extension GameScene: SKPhysicsContactDelegate {
-//
-//  func didBegin(_ contact: SKPhysicsContact) {
-//    var body1: SKPhysicsBody
-//    var body2: SKPhysicsBody
-//
-//    if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
-//      body1 = contact.bodyA
-//      body2 = contact.bodyB
-//    } else {
-//      body1 = contact.bodyB
-//      body2 = contact.bodyA
-//    }
-//
-//  if ((body1.categoryBitMask & PhysicsCategory.balloon != 0) && (body2.categoryBitMask & PhysicsCategory.balloonPopper != 0)){
-//    if let balloon = body1.node as? SKSpriteNode, let balloonPopper = body2.node as? SKSpriteNode {
-//      pinPoppedBalloon(balloon: balloon, balloonPopper: balloonPopper)
-//    }
-//  }
-//}
-//}
-  
-  
-//    let balloonPopper = BalloonPopper()
-//    addChild(balloonPopper)
-//    balloonPopper.position = touchLocation
-//
-//    let scale = SKAction.scale(to: 0.5, duration: 0.1)
-//    let fade = SKAction.fadeOut(withDuration: 0.1)
-//    let done = SKAction.removeFromParent()
-//    let sequence = SKAction.sequence([scale, fade, done])
-//    balloonPopper.run(sequence)
