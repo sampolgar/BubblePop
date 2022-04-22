@@ -22,7 +22,9 @@ class GameScene: SKScene {
   var balloonStack = Stack()
   var player = Player(name: "test")
   var timer = Timer()
-  let scoreLabel = SKLabelNode(fontNamed: "Arial")
+  lazy var timerLabel: SKLabelNode = self.childNode(withName: "timer") as! SKLabelNode
+  lazy var scoreLabel: SKLabelNode = self.childNode(withName: "score") as! SKLabelNode
+
   
   //testing
 //  var entities = [GKEntity]()
@@ -33,24 +35,7 @@ class GameScene: SKScene {
           self.createSceneContents()
           self.sceneContent = true
         }
-//    physicsWorld.contactDelegate = self
     physicsWorld.gravity = .zero
-    
-    // Setup timer
-    if let timer = childNode(withName: "timer") as? Timer {
-      self.timer = timer
-    }
-    
-    createScore()
-  }
-
-  func createScore(){
-    scoreLabel.text = String(player.score)
-    scoreLabel.fontSize = 65
-    scoreLabel.fontColor = SKColor.white
-    scoreLabel.position = CGPoint(x:self.size.width, y:self.size.height)
-    scoreLabel.horizontalAlignmentMode = .right
-    addChild(scoreLabel)
   }
   
   func updateScore(){
@@ -58,19 +43,36 @@ class GameScene: SKScene {
   }
   
   override func sceneDidLoad() {
+    
+//    self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
+//    if let label = self.label {
+//      label.text = "hello beautiful"
+//      print("Hello    \(self.label!.text)")
+//        label.alpha = 0.0
+//        label.run(SKAction.fadeIn(withDuration: 2.0))
+//    }
+    
+    timerLabel.text = timer.text
+    scoreLabel.text = String(player.score)
+    
+    
     timer.startWithDuration(durationInSeconds: 60)
+    
   }
   
   override func update(_ currentTime: TimeInterval) {
     
     if self.balloonCount < 15 {
-      print("Creating balloon. balloon count: \(self.balloonCount)" )
       createBalloon()
     }
     
-    timer.update()
-    
+    updateTimer()
     updateScore()
+  }
+  
+  func updateTimer(){
+    timer.update()
+    timerLabel.text = timer.text
   }
   
   func createSceneContents(){

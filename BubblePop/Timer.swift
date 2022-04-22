@@ -6,6 +6,7 @@
 //credit to https://tutorials.tinyappco.com/SwiftGames/Timer
 import SpriteKit
 class Timer: SKLabelNode {
+//    var countdownDuration: Int
     var endTime:Date!
     
     override init () {
@@ -14,14 +15,14 @@ class Timer: SKLabelNode {
     }
     
     func setup(){
-        self.verticalAlignmentMode = .center
-        self.fontSize = 65
-        self.fontColor = UIColor.white
+//        self.verticalAlignmentMode = .center
+//        self.fontSize = 65
+//        self.fontColor = UIColor.white
     }
  
     func update(){
         let timeLeftInteger = Int(timeLeft())
-        text = String(timeLeftInteger)
+        self.text = String(timeLeftInteger)
     }
     
     func startWithDuration(durationInSeconds: TimeInterval){

@@ -33,7 +33,7 @@ class Balloon: SKSpriteNode {
     
     
     init () {
-        let balloonSize = CGSize(width: 50, height: 50)
+        let balloonSize = CGSize(width: 100, height: 100)
         
         super.init(texture: nil, color: UIColor.clear, size: balloonSize)
         setupGameRequirements()
