@@ -5,27 +5,41 @@
 //  Created by Samuel Polgar on 2/5/2022.
 //
 //
-
 import SpriteKit
 import GameplayKit
 
+let GameMessageName = "gameMessage"
 
 
-class GameScene: SKScene {
+struct PhysicsCategory {
+    static let none             : UInt32 = 0
+    static let all              : UInt32 = UInt32.max
+    static let balloon          : UInt32 = 0b1         // 1
+    static let balloonPopper    : UInt32 = 0b10       //  2
+}
+
+class GameScene: SKScene, SKPhysicsContactDelegate {
+    
+    lazy var gameState: GKStateMachine = GKStateMachine(states: [
+        WaitForStart(scene: self),
+        Playing(scene: self),
+        GameOverStartAgain(scene: self)
+    ])
+    
     var gameIsOver = false;
     var balloonCount = 0
     var lastUpdateTime: CFTimeInterval = 0
-    var sceneContent = false
-    var balloonsAdded = [SKSpriteNode]()
-    var balloonStack = Stack()
+//    var balloonsAdded = [SKSpriteNode]()
+//    var balloonStack = Stack()
     //    var player = Player(name: "test")
-    var player = Player(id: "test", name: "test")
-    var timer = Timer()
-    lazy var timerLabel: SKLabelNode = self.childNode(withName: "timer") as! SKLabelNode
-    lazy var scoreLabel: SKLabelNode = self.childNode(withName: "score") as! SKLabelNode
-    var chosenDuration = UserDefaults.standard.string(forKey: "balloonSeconds")
-    var chosenBalloonCount = UserDefaults.standard.string(forKey: "balloonNo")
-    var score = Score(score: 0, time: 0)
+//    var player = Player(id: "test", name: "test")
+//    var timer = Timer()
+//    lazy var timerLabel: SKLabelNode = self.childNode(withName: "timer") as! SKLabelNode
+//    lazy var scoreLabel: SKLabelNode = self.childNode(withName: "score") as! SKLabelNode
+//    var chosenDuration = UserDefaults.standard.string(forKey: "balloonSeconds")
+//    var chosenBalloonCount = UserDefaults.standard.string(forKey: "balloonNo")
+//    var score = Score(id: UUID().uuidString, username: "Samabababa", score: 0, time: 0)
+//
     //    var score = Score(player: player, score: 0, time: 0)
     
     //testing
@@ -33,13 +47,16 @@ class GameScene: SKScene {
     //    var graphs = [String : GKGraph]()
     
     override func didMove(to view: SKView) {
-        
-        
-        if (!self.sceneContent) {
-            self.createSceneContents()
-            self.sceneContent = true
-        }
-        physicsWorld.gravity = .zero
+        let gameMessage = SKLabelNode(fontNamed: "Chalkduster")
+        gameMessage.name = GameMessageName
+        gameMessage.text = "Ready? Click here!"
+        gameMessage.fontSize = 65
+        gameMessage.fontColor = SKColor.blue
+        gameMessage.position = CGPoint(x: frame.midX, y: frame.midY)
+        addChild(gameMessage)
+
+        gameState.enter(WaitForStart.self)
+
     }
     
     func updateScore(){
@@ -83,11 +100,7 @@ class GameScene: SKScene {
         timerLabel.text = timer.text
     }
     
-    func createSceneContents(){
-        let borderBody = SKPhysicsBody(edgeLoopFrom: self.frame)
-        borderBody.friction = 0
-        self.physicsBody = borderBody
-    }
+
     
     func gameOver(){
         let gameOverScene = GameOver(size: self.size, score: self.score.score, time: self.chosenDuration ?? "60")
@@ -97,7 +110,8 @@ class GameScene: SKScene {
 
 func createBalloon(){
     let currentBalloon = Balloon()
-    print("balloons pos is\(currentBalloon.position)")
+    print("balloons pos is\(currentBalloon.position) and velocity is \(String(describing: currentBalloon.physicsBody?.velocity))")
+    
     currentBalloon.name = "balloon"
     balloonCount += 1
     addChild(currentBalloon)

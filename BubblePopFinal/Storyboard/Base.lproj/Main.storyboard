@@ -138,7 +138,7 @@
                     <tabBarItem key="tabBarItem" title="" image="leaderBoardTab1" id="r33-35-4Gj"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="leaderboardContainer" destination="rZF-OL-8th" id="KX8-uu-6Wi"/>
+                        <outlet property="leaderboardContainer" destination="rZF-OL-8th" id="QSI-Mg-MSd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5C8-8Y-VHo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -6,32 +6,30 @@
 //
 import SpriteKit
 
-struct PhysicsCategory {
-  static let none             : UInt32 = 0
-  static let all              : UInt32 = UInt32.max
-  static let balloon          : UInt32 = 0b1         // 1
-  static let balloonPopper    : UInt32 = 0b10       //  2
-}
+
 
 let degreesToRadians = CGFloat.pi / 180
 let radiansToDegrees = 180 / CGFloat.pi
 
 let maxGameDuration = 60;
-let maxBalloonVelocity: CGFloat = 200
+let maxBalloonVelocity: CGFloat = 20
 let maxBalloonAcceleration: CGFloat = 400
 
 func random() -> CGFloat {
-  return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
+    return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
 }
 
 func random(min: CGFloat, max: CGFloat) -> CGFloat {
-  return random() * (max - min) + min
+    return random() * (max - min) + min
+}
+
+func randomInteger(min: Int, max: Int) -> Int {
+    return Int.random(in: min...max)
 }
 
 func /(point: CGPoint, scalar: CGFloat) -> CGPoint {
-  return CGPoint(x: point.x / scalar, y: point.y / scalar)
+    return CGPoint(x: point.x / scalar, y: point.y / scalar)
 }
-
 
 
 class Balloon: SKSpriteNode {
@@ -87,11 +85,15 @@ class Balloon: SKSpriteNode {
         let balloonY = random(min: self.size.height/4, max: (self.scene?.size.height ?? 200 - self.size.height/2))
         let velocityX = random(min: -200, max: 100)
         let velocityY = random(min: -250, max: 250)
+        let impulseX = random(min: -5, max: 5)
+        let impulseY = random(min: -5, max: 5)
         
-        self.position = CGPoint(x: balloonX, y: balloonY)                 // create the balloon on the 
+        self.position = CGPoint(x: balloonX, y: balloonY)                 // create the balloon on the
         
         //setup physics
+        self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
         self.physicsBody = SKPhysicsBody(texture: self.texture ?? defaultImage, size: self.size)
+        
         self.physicsBody?.friction = 0
         self.physicsBody?.restitution = 1
         self.physicsBody?.angularDamping = 0
@@ -101,6 +103,7 @@ class Balloon: SKSpriteNode {
         
         //set starting velocity
         self.physicsBody?.velocity = CGVector(dx: velocityX, dy: velocityY)
+        self.physicsBody!.applyImpulse(CGVector(dx: impulseX, dy: impulseY))
         
         /*
          categoryBitMask - number defining the type of object this is for considering collisions

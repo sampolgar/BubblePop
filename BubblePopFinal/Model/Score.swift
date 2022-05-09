@@ -13,12 +13,12 @@ class Score: Identifiable, ObservableObject {
     var id: String
     var score: Int
     var time: Int
-    var name: String
+    var username: String
     
-    init(score: Int, time: Int) {
+    init(id: String, username: String, score: Int, time: Int) {
         self.id = defaults.string(forKey: "email") ?? "id"
         self.score = score
         self.time = time
-        self.name = defaults.string(forKey: "name") ?? "name"
+        self.username = defaults.string(forKey: "name") ?? "name"
     }
 }

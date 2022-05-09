@@ -1,8 +1,58 @@
-//import Foundation
-//import Firebase
-//import FirebaseCore
-//import FirebaseAnalytics
-//import FirebaseDatabase
+import UIKit
+import FirebaseCore
+import Firebase
+import FirebaseAuth
+import GoogleSignIn
+
+FirebaseApp.configure()
+
+//print("hello")
+////
+//let ref = Database.database().reference()
+//print(ref)
+//ref.child("users").child("31a3d006-2c1b-4154-a4fc-ea6948cacc2d").setValue(["username": "sampolgarc"])
+//print("done")
+//
+
+//func getData() {
+
+var list = [Score]()
+    
+    //get a ref to the database
+    let ref = Database.database().reference().child("highestScores").queryOrdered(byChild: "score").queryLimited(toLast: 5)
+    
+    ref.observeSingleEvent(of: .value, with: {(snapshot) in
+        guard let dictionary = snapshot.value as? [String:Any] else {return}
+        
+        DispatchQueue.main.async {
+            
+            dictionary.forEach({(key, value) in
+                
+                if let resultsArray = value as? [String: Any] {
+                    let id = key
+//                    print("id is \(id)")
+                    let score = resultsArray["score"] as? Int
+//                    print("score is \(score)")
+                    let time = resultsArray["time"] as? Int
+//                    print("score is \(time)")
+                    let username = resultsArray["username"] as? String
+                    let scoreObj = Score(id: id, username: username ?? "", score: score ?? 0, time: time ?? 0)
+                    list.append(scoreObj)
+                }
+            })
+        }
+        for score in list {
+            print("hello i \(score.username)")
+        }
+    })
+//}
+
+
+
+
+//ref.child("users").setValue(["username": "sampolga"])
+
+
 //
 //FirebaseApp.configure()
 //
