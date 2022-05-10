@@ -18,6 +18,7 @@
 		8EC3BEE328295103006191DE /* WaitForStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC3BEE228295103006191DE /* WaitForStart.swift */; };
 		8EC3BEE528295167006191DE /* Playing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC3BEE428295167006191DE /* Playing.swift */; };
 		8EC3BEE72829518B006191DE /* GameOverStartAgain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC3BEE62829518B006191DE /* GameOverStartAgain.swift */; };
+		8EC3BEE92829F0EB006191DE /* ThreeSecondCountdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC3BEE82829F0EB006191DE /* ThreeSecondCountdown.swift */; };
 		8EC90A87281FF71E007780F7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC90A86281FF71E007780F7 /* SettingsViewController.swift */; };
 		8EC90A8B281FF7CA007780F7 /* AllSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC90A88281FF7CA007780F7 /* AllSettingsView.swift */; };
 		8EC90A8F281FF934007780F7 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC90A8E281FF934007780F7 /* PlayViewController.swift */; };
@@ -57,6 +58,7 @@
 		8EC3BEE228295103006191DE /* WaitForStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitForStart.swift; sourceTree = "<group>"; };
 		8EC3BEE428295167006191DE /* Playing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playing.swift; sourceTree = "<group>"; };
 		8EC3BEE62829518B006191DE /* GameOverStartAgain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverStartAgain.swift; sourceTree = "<group>"; };
+		8EC3BEE82829F0EB006191DE /* ThreeSecondCountdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeSecondCountdown.swift; sourceTree = "<group>"; };
 		8EC90A86281FF71E007780F7 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8EC90A88281FF7CA007780F7 /* AllSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllSettingsView.swift; sourceTree = "<group>"; };
 		8EC90A8E281FF934007780F7 /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				8EC3BEE228295103006191DE /* WaitForStart.swift */,
+				8EC3BEE82829F0EB006191DE /* ThreeSecondCountdown.swift */,
 				8EC3BEE428295167006191DE /* Playing.swift */,
 				8EC3BEE62829518B006191DE /* GameOverStartAgain.swift */,
 			);
@@ -366,6 +369,7 @@
 				8EC3BEE528295167006191DE /* Playing.swift in Sources */,
 				8EC90AA028203374007780F7 /* ViewModel.swift in Sources */,
 				8EC90A9828200042007780F7 /* GameSettingsBalloonNo.swift in Sources */,
+				8EC3BEE92829F0EB006191DE /* ThreeSecondCountdown.swift in Sources */,
 				8EC90A8F281FF934007780F7 /* PlayViewController.swift in Sources */,
 				8EC90AA228203486007780F7 /* Score.swift in Sources */,
 				8E888D7D2820B7C300431348 /* LeaderboardViewModel.swift in Sources */,

@@ -6,18 +6,10 @@
 //credit to https://tutorials.tinyappco.com/SwiftGames/Timer
 import SpriteKit
 class Timer: SKLabelNode {
-//    var countdownDuration: Int
     var endTime:Date!
     
     override init () {
         super.init()
-        setup()
-    }
-    
-    func setup(){
-//        self.verticalAlignmentMode = .center
-//        self.fontSize = 65
-//        self.fontColor = UIColor.white
     }
  
     func update(){
@@ -43,5 +35,4 @@ class Timer: SKLabelNode {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
       }
-
 }

@@ -22,14 +22,13 @@ class WaitForStart: GKState {
     }
     
     override func willExit(to nextState: GKState) {
-        if nextState is Playing {
+        if nextState is ThreeSecondCountdown {
             let scale = SKAction.scale(to: 0, duration: 0.5)
             scene.childNode(withName: GameMessageName)!.run(scale)
         }
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        return stateClass is Playing.Type
+        return stateClass is ThreeSecondCountdown.Type
     }
-    
 }

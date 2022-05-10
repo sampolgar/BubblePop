@@ -6,8 +6,6 @@
 //
 import SpriteKit
 
-
-
 let degreesToRadians = CGFloat.pi / 180
 let radiansToDegrees = 180 / CGFloat.pi
 
@@ -81,8 +79,8 @@ class Balloon: SKSpriteNode {
     
     private func setupPhysics(){
         let defaultImage = SKTexture(imageNamed: "pinkBalloon.png")
-        let balloonX = random(min: self.size.width/4, max: (self.scene?.size.width ?? 200 - self.size.width/2))
-        let balloonY = random(min: self.size.height/4, max: (self.scene?.size.height ?? 200 - self.size.height/2))
+        let balloonX = random(min: self.size.width/2, max: (scene!.size.width - self.size.width/2))
+        let balloonY = random(min: self.size.height/2, max: (scene!.size.height - self.size.height/2))
         let velocityX = random(min: -200, max: 100)
         let velocityY = random(min: -250, max: 250)
         let impulseX = random(min: -5, max: 5)
@@ -112,6 +110,5 @@ class Balloon: SKSpriteNode {
          */
         self.physicsBody?.categoryBitMask = PhysicsCategory.balloon
         self.physicsBody?.collisionBitMask = PhysicsCategory.all
-        self.physicsBody?.contactTestBitMask = PhysicsCategory.balloonPopper
     }
 }
