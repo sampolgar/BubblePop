@@ -20,8 +20,10 @@ class Playing: GKState {
     var balloonStack = Stack()
     var player = Player(id: "test", name: "test")
     var timer = Timer()
+    
     lazy var timerLabel: SKLabelNode = scene.childNode(withName: "timer") as! SKLabelNode
     lazy var scoreLabel: SKLabelNode = scene.childNode(withName: "score") as! SKLabelNode
+    
     var score = Score(id: UUID().uuidString, username: "Samabababa", score: 0, time: 0)
     
     unowned let scene: GameScene
@@ -32,7 +34,7 @@ class Playing: GKState {
     }
     
     override func didEnter(from previousState: GKState?) {
-        scene.scoreLabel.isHidden = false
+        scoreLabel.isHidden = false
         scene.gameTimer.startWithDuration(durationInSeconds: Double(chosenDuration!)! + 1)
         if previousState is ThreeSecondCountdown {
             //generating x number of balloons every 1 second of game play
@@ -42,35 +44,65 @@ class Playing: GKState {
             //calculate the score
             
             
+            let waitForOneSecond = SKAction.wait(forDuration: 1)
             
-            //start/stop balloons on screen
-            //if start - create balloons and put them on screen
-            //if stop - remove balloons from the screen
+            let waitForTwoSecond = SKAction.wait(forDuration: 2)
             
-            //create x number of balloons
-            balloonNodes = generateBalloons()
-            print("balloon node count is: \(balloonNodes.count)")
+            let spawnBalloonsAction = SKAction.run {
+                self.addBalloonsToScene()
+            }
+            let removeBalloonsAction = SKAction.run {
+                self.removeBalloonsFromScene()
+            }
             
-            //loop through balloonNodes and add them to the scene
-            
-            
-            
-            
-            //add balloons with function that removes them every second
-            let wait = SKAction.wait(forDuration: 1)
+            scene.run(SKAction.repeatForever(
+                SKAction.sequence([
+                    spawnBalloonsAction,
+                    waitForTwoSecond,
+                    removeBalloonsAction,
+                    waitForOneSecond
+                ]))
+            )
         }
     }
-
     
+    
+    func removeBalloonsFromScene() {
+        for balloons in balloonNodes {
+            balloons.removeFromParent()
+            balloonNodes.removeAll()
+        }
+    }
+    
+    //create balloons and add them to the scene
+    func addBalloonsToScene() {
+        balloonNodes = generateBalloons()
+        print("balloon node count is: \(balloonNodes.count)")
+        for balloons in balloonNodes {
+            scene.addChild(balloons)
+        }
+    }
+    
+    func createBalloon() -> SKNode<Balloon> {
+        
+    }
     
     func generateBalloons() -> Array<Balloon> {
         var balloonArr = [Balloon]()
         let chosenBalloonInt = Int(chosenBalloonCount!)
         let numberOfBalloonsToGenerate = randomInteger(min: 1, max: chosenBalloonInt!)//selects a number between 1 and the max to generate per second
-        for index in 1...numberOfBalloonsToGenerate {
-            let balloon = Balloon()
+        
+        for index in 0...numberOfBalloonsToGenerate {
+            print("number of balloons to gen: \(numberOfBalloonsToGenerate)")
+            
+            //create balloon, send the scene to measure the frame
+            let balloon = Balloon(gameScene: scene)
+            
             balloon.name = "balloon"
+            
+            
             balloonArr.append(balloon)
+            
             print("balloons pos is\(balloon.position) and velocity is \(String(describing: balloon.physicsBody?.velocity))")
         }
         return balloonArr
@@ -82,8 +114,6 @@ class Playing: GKState {
         scene.updateScore()
         
         scene.updateTimer()
-        
-        
         
     }
     

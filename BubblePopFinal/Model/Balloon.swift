@@ -3,44 +3,39 @@
 //  BubblePop
 //
 //  Created by Samuel Polgar on 12/4/2022.
-//
+//After a long time troubleshooting, there is a bug in skspritenode
+//https://stackoverflow.com/questions/47169966/setting-physics-body-in-initializer-of-skspritenode-custom-subclass-doesnt-work
+
 import SpriteKit
 
-let degreesToRadians = CGFloat.pi / 180
-let radiansToDegrees = 180 / CGFloat.pi
-
 let maxGameDuration = 60;
-let maxBalloonVelocity: CGFloat = 20
-let maxBalloonAcceleration: CGFloat = 400
-
-func random() -> CGFloat {
-    return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
-}
-
-func random(min: CGFloat, max: CGFloat) -> CGFloat {
-    return random() * (max - min) + min
-}
-
-func randomInteger(min: Int, max: Int) -> Int {
-    return Int.random(in: min...max)
-}
-
-func /(point: CGPoint, scalar: CGFloat) -> CGPoint {
-    return CGPoint(x: point.x / scalar, y: point.y / scalar)
-}
-
 
 class Balloon: SKSpriteNode {
     var balloonColor: String?
     var gameScore: Double?
+    var width: CGFloat
+    var height: CGFloat
     
     
-    init () {
+    init (gameScene: SKScene) {
         let balloonSize = CGSize(width: 150, height: 150)
         
+        width = gameScene.frame.width
+        height = gameScene.frame.height
+        
         super.init(texture: nil, color: UIColor.clear, size: balloonSize)
+        
         setupGameRequirements()
-        setupPhysics()
+        
+        print(self)
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01)
+//        {
+//            self.setupPhysics()
+//            print(self.physicsBody)
+//            print("here in dispatch")
+//        }
+        
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -77,20 +72,24 @@ class Balloon: SKSpriteNode {
         }
     }
     
-    private func setupPhysics(){
+    func setupPhysics(){
+        //create physics
         let defaultImage = SKTexture(imageNamed: "pinkBalloon.png")
-        let balloonX = random(min: self.size.width/2, max: (scene!.size.width - self.size.width/2))
-        let balloonY = random(min: self.size.height/2, max: (scene!.size.height - self.size.height/2))
+        self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
+        self.physicsBody = SKPhysicsBody(texture: self.texture ?? defaultImage, size: self.size)
+        //set random x and y coordinates
+        
+        let balloonX = random(min: self.size.width*2, max: width  - self.size.width*2)
+        let balloonY = random(min: self.size.height*2, max: height - self.size.height*2)
+        self.position = CGPoint(x: balloonX, y: balloonY)                 // create the balloon on random x/y
+
+        //set random velocities
         let velocityX = random(min: -200, max: 100)
         let velocityY = random(min: -250, max: 250)
+        //set random impulse
         let impulseX = random(min: -5, max: 5)
         let impulseY = random(min: -5, max: 5)
         
-        self.position = CGPoint(x: balloonX, y: balloonY)                 // create the balloon on the
-        
-        //setup physics
-        self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
-        self.physicsBody = SKPhysicsBody(texture: self.texture ?? defaultImage, size: self.size)
         
         self.physicsBody?.friction = 0
         self.physicsBody?.restitution = 1
@@ -110,5 +109,26 @@ class Balloon: SKSpriteNode {
          */
         self.physicsBody?.categoryBitMask = PhysicsCategory.balloon
         self.physicsBody?.collisionBitMask = PhysicsCategory.all
+        print(self)
+        print("here in physics")
     }
+}
+
+
+//functions
+
+func random() -> CGFloat {
+    return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
+}
+
+func random(min: CGFloat, max: CGFloat) -> CGFloat {
+    return random() * (max - min) + min
+}
+
+func randomInteger(min: Int, max: Int) -> Int {
+    return Int.random(in: min...max)
+}
+
+func /(point: CGPoint, scalar: CGFloat) -> CGPoint {
+    return CGPoint(x: point.x / scalar, y: point.y / scalar)
 }
