@@ -13,7 +13,20 @@ class LeaderboardViewModel: ObservableObject {
     
     @Published var list = [Score]()
     
-    func getData() {
+    func createScore(newScore: Score){
+        print("creating score with")
+        let scoreId = newScore.id
+        let username = newScore.username
+        let score = newScore.score
+        let time = newScore.time
+        let ref = Database.database().reference().child("highestScores").child(scoreId).setValue([
+            "score": score,
+            "time": time,
+            "username": username
+        ])
+    }
+    
+    func getScore() {
         
         //get a ref to the database
         let ref = Database.database().reference().child("highestScores").queryOrdered(byChild: "score").queryLimited(toLast: 5)
@@ -26,11 +39,12 @@ class LeaderboardViewModel: ObservableObject {
                 dictionary.forEach({(key, value) in
                     
                     if let resultsArray = value as? [String: Any] {
+                        print(key)
                         let id = key
                         let score = resultsArray["score"] as? Int
                         let time = resultsArray["time"] as? Int
                         let username = resultsArray["username"] as? String
-                        let scoreObj = Score(id: id, username: username ?? "", score: score ?? 0, time: time ?? 0)
+                        let scoreObj = Score(id: id, username: username!, score: score!, time: time!)
                         self.list.append(scoreObj)
                     }
                 })

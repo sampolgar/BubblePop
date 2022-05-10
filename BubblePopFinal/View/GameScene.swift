@@ -15,7 +15,9 @@ var start3SecondCountDown = 4
 let GameTimer = "gameTimer"
 let CountDownTimer = "countDownTimer"
 let GameScore = "score"
+let GameEnded = "gameEnded"
 let Chalkduster = "Chalkduster"
+let leaderboardViewModel = LeaderboardViewModel()
 
 
 struct PhysicsCategory {
@@ -53,7 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var chosenDuration = UserDefaults.standard.string(forKey: "balloonSeconds")
     var chosenBalloonCount = UserDefaults.standard.string(forKey: "balloonNo")
-    var score = Score(id: UUID().uuidString, username: "Samabababa", score: 0, time: 0)
+    var currentScore = Score(id: UUID().uuidString, username: "Samabababa", score: 0, time: 0)
     
     //set the scene
     override func didMove(to view: SKView) {
@@ -72,17 +74,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //set balloon score
         scoreLabel.fontName = Chalkduster
-        scoreLabel.text = String(score.score)
+        scoreLabel.text = String(currentScore.score)
         
         //create play message
         let gameMessage = SKLabelNode(fontNamed: "Chalkduster")
         gameMessage.name = GameMessageName
-        gameMessage.text = "Ready?"
+        gameMessage.text = "Ready? Tap!"
         gameMessage.fontSize = 65
-        gameMessage.fontColor = SKColor.blue
+        gameMessage.fontColor = SKColor.white
         gameMessage.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(gameMessage)
-    
+        
+        let gameEnded = SKLabelNode(fontNamed: "Chalkduster")
+        gameEnded.name = GameEnded
+        gameEnded.text = "Congrats! Tap for settings"
+        gameEnded.fontSize = 40
+        gameEnded.fontColor = SKColor.white
+        gameEnded.position = CGPoint(x: frame.midX, y: frame.midY)
+        addChild(gameEnded)
+        
+        
         gameTimer.startWithDuration(durationInSeconds: 100.00)
         
         countDownTimer.startWithDuration(durationInSeconds: 100.00)
@@ -151,7 +162,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //update score based on current score
     func updateScore(){
-        scoreLabel.text = String(score.score)
+        scoreLabel.text = String(currentScore.score)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -192,14 +203,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if (!balloonStack.isEmpty()) {
                 let lastPoppedBalloon = balloonStack.peek()
                 if (lastPoppedBalloon.balloonColor == currentBalloonColor){
-                    score.score += Int(balloon.gameScore!*1.5)
+                    currentScore.score += Int(balloon.gameScore!*1.5)
                 } else {
-                    score.score += Int(balloon.gameScore!)
+                    currentScore.score += Int(balloon.gameScore!)
                 }
             } else {
-                score.score += Int(balloon.gameScore!)
+                currentScore.score += Int(balloon.gameScore!)
             }
             balloonStack.push(balloon)
             balloon.removeFromParent()
         }
+    
+    func createNewScore(){
+        print("creating current score")
+        leaderboardViewModel.createScore(newScore: currentScore)
     }
+    
+    func segueToLeaderboard(){
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = mainStoryboard.instantiateViewController(withIdentifier: "LeaderboardViewController")
+        self.view?.window?.rootViewController?.present(vc, animated: true, completion: nil)
+     }
+}
+
+

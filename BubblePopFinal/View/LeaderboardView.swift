@@ -37,7 +37,7 @@ struct LeaderboardView: View {
         }
     }
     init() {
-        model.getData()
+        model.getScore()
     }
 }
 

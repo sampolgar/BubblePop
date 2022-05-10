@@ -28,13 +28,6 @@ class Balloon: SKSpriteNode {
         setupGameRequirements()
         
         print(self)
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01)
-//        {
-//            self.setupPhysics()
-//            print(self.physicsBody)
-//            print("here in dispatch")
-//        }
-        
         
     }
     
@@ -74,43 +67,43 @@ class Balloon: SKSpriteNode {
     
     func setupPhysics(){
         //create physics
-        let defaultImage = SKTexture(imageNamed: "pinkBalloon.png")
-        self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
-        self.physicsBody = SKPhysicsBody(texture: self.texture ?? defaultImage, size: self.size)
-        //set random x and y coordinates
-        
-        let balloonX = random(min: self.size.width*2, max: width  - self.size.width*2)
-        let balloonY = random(min: self.size.height*2, max: height - self.size.height*2)
-        self.position = CGPoint(x: balloonX, y: balloonY)                 // create the balloon on random x/y
-
-        //set random velocities
-        let velocityX = random(min: -200, max: 100)
-        let velocityY = random(min: -250, max: 250)
-        //set random impulse
-        let impulseX = random(min: -5, max: 5)
-        let impulseY = random(min: -5, max: 5)
-        
-        
-        self.physicsBody?.friction = 0
-        self.physicsBody?.restitution = 1
-        self.physicsBody?.angularDamping = 0
-        self.physicsBody?.linearDamping = 0
-        self.physicsBody?.angularDamping = 0
-        self.physicsBody?.isDynamic = true
-        
-        //set starting velocity
-        self.physicsBody?.velocity = CGVector(dx: velocityX, dy: velocityY)
-        self.physicsBody!.applyImpulse(CGVector(dx: impulseX, dy: impulseY))
-        
-        /*
-         categoryBitMask - number defining the type of object this is for considering collisions
-         collisionBitMask - number defining what categories of object this node should collide with
-         contactTestBitMask - number defining which collisions we want to be notified about
-         */
-        self.physicsBody?.categoryBitMask = PhysicsCategory.balloon
-        self.physicsBody?.collisionBitMask = PhysicsCategory.all
-        print(self)
-        print("here in physics")
+//        let defaultImage = SKTexture(imageNamed: "pinkBalloon.png")
+//        self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
+//        self.physicsBody = SKPhysicsBody(texture: self.texture ?? defaultImage, size: self.size)
+//        //set random x and y coordinates
+//
+//        let balloonX = random(min: self.size.width*2, max: width  - self.size.width*2)
+//        let balloonY = random(min: self.size.height*2, max: height - self.size.height*2)
+//        self.position = CGPoint(x: balloonX, y: balloonY)                 // create the balloon on random x/y
+//
+//        //set random velocities
+//        let velocityX = random(min: -200, max: 100)
+//        let velocityY = random(min: -250, max: 250)
+//        //set random impulse
+//        let impulseX = random(min: -5, max: 5)
+//        let impulseY = random(min: -5, max: 5)
+//
+//
+//        self.physicsBody?.friction = 0
+//        self.physicsBody?.restitution = 1
+//        self.physicsBody?.angularDamping = 0
+//        self.physicsBody?.linearDamping = 0
+//        self.physicsBody?.angularDamping = 0
+//        self.physicsBody?.isDynamic = true
+//
+//        //set starting velocity
+//        self.physicsBody?.velocity = CGVector(dx: velocityX, dy: velocityY)
+//        self.physicsBody!.applyImpulse(CGVector(dx: impulseX, dy: impulseY))
+//
+//        /*
+//         categoryBitMask - number defining the type of object this is for considering collisions
+//         collisionBitMask - number defining what categories of object this node should collide with
+//         contactTestBitMask - number defining which collisions we want to be notified about
+//         */
+//        self.physicsBody?.categoryBitMask = PhysicsCategory.balloon
+//        self.physicsBody?.collisionBitMask = PhysicsCategory.all
+//        print(self)
+//        print("here in physics")
     }
 }
 
