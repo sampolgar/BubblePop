@@ -6,42 +6,72 @@
 //
 
 import SpriteKit
+import UIKit
+import Firebase
+import FirebaseAuthUI
+import FirebaseGoogleAuthUI
+import FirebaseOAuthUI
+import FirebaseEmailAuthUI
+import FirebaseAnalytics
+import FirebaseDatabase
 
-class LoginViewController: UIViewController {
+typealias FIRUser = FirebaseAuth.User
+
+class LoginViewController: UIViewController, FUIAuthDelegate{
     
-    var defaults = UserDefaults.standard
-    @IBOutlet weak var enterNameLabel: UILabel!
-    @IBOutlet weak var EnterEmailLabel: UILabel!
     
-    @IBOutlet weak var nameInput: UITextField!
-    @IBOutlet weak var emailInput: UITextField!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+    }
     
-    @IBOutlet weak var loginButton: UIButton!
     
-    override func viewDidLoad(){
-        if(!defaults.bool(forKey: "name")) {
-            //new user
-            enterNameLabel.text = "Enter Name"
-            EnterEmailLabel.text = "Enter Email"
+    let user: FIRUser? = Auth.auth().currentUser
+    
+    @IBAction func loginButtonPress(_ sender: Any) {
+        print("login button tapped")
+        
+        
+        guard let authUI = FUIAuth.defaultAuthUI() else { return }
+        
+        authUI.delegate = self
+        
+        let googleAuthProvider = FUIGoogleAuth(authUI: authUI)
+        let authProviders: [FUIAuthProvider] = [
+            googleAuthProvider,
+            FUIEmailAuth()
+        ]
+        
+        authUI.providers = authProviders
+        
+        func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
+            let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String?
             
-        } else {
-            //previous user
-            enterNameLabel.text = "Welcome"
-            EnterEmailLabel.text = ""
-            
-            nameInput.text = defaults.string(forKey: "name")
-            emailInput.text = defaults.string(forKey: "email")
+            if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
+                return true
+            }
+            return false
         }
+        
+        let authViewController = authUI.authViewController()
+        print("The authviewcontrollers loading: \(authViewController)")
+        self.present(authViewController, animated: true) //send the user to the firebase auth
     }
     
-    
-    @IBAction func loginButtonPressed(_ sender: Any) {
-        let name = nameInput.text
-        let email = emailInput.text
+    func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
+        if let error = error {
+            assertionFailure("Error Signing In \(error.localizedDescription)")
+            return
+        }
+        print("handle user and signup")
         
-        defaults.set(name, forKey: "name")
-        defaults.set(email, forKey: "email")
+        guard let user = authDataResult?.user else { return }
         
-        performSegue(withIdentifier: "segueToTabBar", sender: self)
+        UserDefaults.standard.set(user.displayName, forKey: "userDisplayName")
+        UserDefaults.standard.set(user.email, forKey: "userEmail")
+        
+        self.performSegue(withIdentifier: "segueToTabBar", sender: self)
+        
     }
+    
 }

@@ -155,10 +155,7 @@ class Playing: GKState {
         default:
             break
         }
-        
-        //
-        //        let balloonX = random(min: balloon.size.width*2, max: displaySize.width  - balloon.size.height*2)
-        //        let balloonY = random(min: balloon.size.height*2, max: displaySize.height - balloon.size.height*2)
+
         print("position is \(position)")
         balloon.position =  position              // create the balloon on random x/y
         
@@ -182,11 +179,22 @@ class Playing: GKState {
     
     override func willExit(to nextState: GKState) {
         //delete nodes
-//        scene.childNode(withName: CountDownTimer)?.removeFromParent()
-//        scene.childNode(withName: GameScore)?.removeFromParent()
         //remove the actions
+        scene.gameTimer
+        print("score label is: \(scoreLabel.isHidden)")
+        scoreLabel.isHidden = true
+        print("score label is now: \(scoreLabel.isHidden)")
+        scene.scoreLabel.isHidden = true
+        scene.childNode(withName: "score")?.removeFromParent()
+        
+        
         self.scene.removeAllActions()
         removeBalloonsFromScene()
+        scene.childNode(withName: GameTimer)?.removeFromParent()
+        scene.childNode(withName: CountDownTimer)?.removeFromParent()
+        scene.childNode(withName: GameScore)?.removeFromParent()
+       
+        
     }
 
 override func isValidNextState(_ stateClass: AnyClass) -> Bool {

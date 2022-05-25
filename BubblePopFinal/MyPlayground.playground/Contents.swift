@@ -16,36 +16,39 @@ FirebaseApp.configure()
 
 //func getData() {
 
-var list = [Score]()
-    
-    //get a ref to the database
-    let ref = Database.database().reference().child("highestScores").queryOrdered(byChild: "score").queryLimited(toLast: 5)
-    
-    ref.observeSingleEvent(of: .value, with: {(snapshot) in
-        guard let dictionary = snapshot.value as? [String:Any] else {return}
-        
-        DispatchQueue.main.async {
-            
-            dictionary.forEach({(key, value) in
-                
-                if let resultsArray = value as? [String: Any] {
-                    let id = key
-//                    print("id is \(id)")
-                    let score = resultsArray["score"] as? Int
-//                    print("score is \(score)")
-                    let time = resultsArray["time"] as? Int
-//                    print("score is \(time)")
-                    let username = resultsArray["username"] as? String
-                    let scoreObj = Score(id: id, username: username ?? "", score: score ?? 0, time: time ?? 0)
-                    list.append(scoreObj)
-                }
-            })
-        }
-        for score in list {
-            print("hello i \(score.username)")
-        }
-    })
-//}
+//var list = [Score]()
+//
+//    //get a ref to the database
+//    let ref = Database.database().reference().child("highestScores").queryOrdered(byChild: "score").queryLimited(toLast: 5)
+//
+//    ref.observeSingleEvent(of: .value, with: {(snapshot) in
+//        guard let dictionary = snapshot.value as? [String:Any] else {return}
+//
+//        DispatchQueue.main.async {
+//
+//            dictionary.forEach({(key, value) in
+//
+//                if let resultsArray = value as? [String: Any] {
+//                    let id = key
+////                    print("id is \(id)")
+//                    let score = resultsArray["score"] as? Int
+////                    print("score is \(score)")
+//                    let time = resultsArray["time"] as? Int
+////                    print("score is \(time)")
+//                    let username = resultsArray["username"] as? String
+//                    let scoreObj = Score(id: id, username: username ?? "", score: score ?? 0, time: time ?? 0)
+//                    list.append(scoreObj)
+//                }
+//            })
+//        }
+//        for score in list {
+//            print("hello i \(score.username)")
+//        }
+//    })
+////}
+
+
+
 
 
 

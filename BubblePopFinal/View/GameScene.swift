@@ -16,6 +16,7 @@ let GameTimer = "gameTimer"
 let CountDownTimer = "countDownTimer"
 let GameScore = "score"
 let GameEnded = "gameEnded"
+let GameOverScore = "gameOverScore"
 let Chalkduster = "Chalkduster"
 let leaderboardViewModel = LeaderboardViewModel()
 
@@ -85,6 +86,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameMessage.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(gameMessage)
         
+        
+        gameTimer.startWithDuration(durationInSeconds: 100.00)
+        
+        countDownTimer.startWithDuration(durationInSeconds: 100.00)
+        
+        gameState.enter(WaitForStart.self)
+    }
+    
+    func createGameOverMessage(){
         let gameEnded = SKLabelNode(fontNamed: "Chalkduster")
         gameEnded.name = GameEnded
         gameEnded.text = "Congrats! Tap for settings"
@@ -92,13 +102,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameEnded.fontColor = SKColor.white
         gameEnded.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(gameEnded)
+    }
+    
+    func createGameOverScore(){
+        let gameOverScore = SKLabelNode(fontNamed: "Chalkduster")
+        gameOverScore.name = GameOverScore
+        gameOverScore.text = "Score: \(currentScore.score) in: \(chosenDuration!) seconds"
+        gameOverScore.fontSize = 40
+        gameOverScore.fontColor = SKColor.white
+        gameOverScore.position = CGPoint(x: frame.midX, y: frame.midY-100)
+        addChild(gameOverScore)
+    }
+    
+    func addScoresToLeaderboard(){
+//        UserDefaults.standard.set(user.displayName, forKey: "userDisplayName")
+//        UserDefaults.standard.set(user.email, forKey: "userEmail")
+        let username = UserDefaults.standard.string(forKey: "userDisplayName") ?? ""
+        print("creating score: ")
         
-        
-        gameTimer.startWithDuration(durationInSeconds: 100.00)
-        
-        countDownTimer.startWithDuration(durationInSeconds: 100.00)
-        
-        gameState.enter(WaitForStart.self)
+        let newScore = Score(id: "", username: username, score: currentScore.score, time: Int(chosenDuration!) ?? 60)
+        LeaderboardViewModel(newScore: newScore).createScore()
     }
     
     //setting the scene
@@ -187,6 +210,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     touchedBalloon(balloon: balloon)
                 }
             }
+
+        case is GameOverStartAgain:
+            segueToLeaderboard()
             
         default:
             break
@@ -216,14 +242,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func createNewScore(){
         print("creating current score")
-        leaderboardViewModel.createScore(newScore: currentScore)
     }
     
     func segueToLeaderboard(){
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = mainStoryboard.instantiateViewController(withIdentifier: "LeaderboardViewController")
-        self.view?.window?.rootViewController?.present(vc, animated: true, completion: nil)
+        let tabViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarViewController")
+        UIApplication.topViewController()?.present(tabViewController, animated: true, completion: nil)
+        
      }
 }
 
-
+extension UIApplication {
+    class func topViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let nav = base as? UINavigationController {
+            return topViewController(base: nav.visibleViewController)
+        }
+        if let tab = base as? UITabBarController {
+            if let selected = tab.selectedViewController {
+                return topViewController(base: selected)
+            }
+        }
+        if let presented = base?.presentedViewController {
+            return topViewController(base: presented)
+        }
+        return base
+    }
+}

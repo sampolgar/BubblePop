@@ -13,20 +13,19 @@ class GameOverStartAgain: GKState {
     init(scene: SKScene) {
         self.scene = scene as! GameScene
         super.init()
+        
     }
     
     override func didEnter(from previousState: GKState?) {
         //send scores to the DB
-        let scale = SKAction.scale(to: 1.0, duration: 0.5)
-        scene.childNode(withName: GameEnded)!.run(scale)
-        print("hererere")
+//        GameScene.GameScore.
+
+        scene.createGameOverMessage()
+        scene.createGameOverScore()
+        scene.addScoresToLeaderboard()
     }
     
     override func willExit(to nextState: GKState) {
-        scene.childNode(withName: CountDownTimer)?.removeFromParent()
-        scene.childNode(withName: GameScore)?.removeFromParent()
-        
-        
         
         let wait = SKAction.wait(forDuration: 4)
         
@@ -42,8 +41,4 @@ class GameOverStartAgain: GKState {
         }
         
     }
-    
-//    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-//        return stateClass is WaitForStart.Type
-//    }
 }

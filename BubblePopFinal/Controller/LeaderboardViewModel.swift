@@ -12,24 +12,34 @@ import FirebaseCore
 class LeaderboardViewModel: ObservableObject {
     
     @Published var list = [Score]()
+    var newScore: Score
     
-    func createScore(newScore: Score){
-        print("creating score with")
-        let scoreId = newScore.id
-        let username = newScore.username
-        let score = newScore.score
-        let time = newScore.time
-        let ref = Database.database().reference().child("highestScores").child(scoreId).setValue([
-            "score": score,
-            "time": time,
-            "username": username
-        ])
+    init(newScore: Score){
+        self.newScore = newScore
     }
+    
+    init(){
+        newScore = Score(id: "", username: "", score: 0, time: 0)
+    }
+    
+    func createScore() {
+        
+        let obj: [String: Any] = [
+            "score": newScore.score,
+            "time": newScore.time,
+            "username": newScore.username
+        ]
+
+        let highestScoreRef = Database.database().reference().child("highestScores").child(UUID().uuidString).setValue(obj)
+    }
+    
+    
+    
     
     func getScore() {
         
         //get a ref to the database
-        let ref = Database.database().reference().child("highestScores").queryOrdered(byChild: "score").queryLimited(toLast: 5)
+        let ref = Database.database().reference().child("highestScores").queryOrdered(byChild: "score").queryLimited(toLast: 10)
         
         ref.observeSingleEvent(of: .value, with: {(snapshot) in
             guard let dictionary = snapshot.value as? [String:Any] else {return}
@@ -45,7 +55,12 @@ class LeaderboardViewModel: ObservableObject {
                         let time = resultsArray["time"] as? Int
                         let username = resultsArray["username"] as? String
                         let scoreObj = Score(id: id, username: username!, score: score!, time: time!)
+                        
                         self.list.append(scoreObj)
+                        
+                        //order the list
+                        self.list.sort(by: { $0.score > $1.score })
+                        
                     }
                 })
             }
